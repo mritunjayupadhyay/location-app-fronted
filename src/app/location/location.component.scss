@@ -1,0 +1,11 @@
+.list-details-container {
+  display: flex;
+  min-height: 100vh;
+  flex-wrap: wrap;
+  > div {
+    width: 50%;
+    @media screen and (max-width: 720px) {
+      width: 100%;
+    }
+  }
+}
