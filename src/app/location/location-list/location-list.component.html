@@ -1,3 +1,5 @@
-<app-location-item></app-location-item>
-<app-location-item></app-location-item>
-<app-location-item></app-location-item>
+<app-location-item 
+  *ngFor="let locationItem of locations"
+  [location]="locationItem"
+>
+</app-location-item>
