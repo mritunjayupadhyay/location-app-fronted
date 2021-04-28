@@ -1,9 +1,18 @@
+
 .list-details-container {
   display: flex;
   min-height: 100vh;
   flex-wrap: wrap;
+  h2 {
+    font-size: 25px;
+    margin: 20px 15px;
+  }
   > div {
     width: 50%;
+    height: 100%;
+    .padding-10 {
+      padding: 10px;
+    }
     @media screen and (max-width: 720px) {
       width: 100%;
     }

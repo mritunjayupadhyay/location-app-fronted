@@ -8,7 +8,12 @@ import { LocationService } from '../location.service';
   styleUrls: ['./location-map-details.component.scss']
 })
 export class LocationMapDetailsComponent implements OnInit {
-  location: Location;
+  location: Location = {
+    latitude: 12,
+    longitude: 20,
+    address: 'some addres',
+    userId: 'sdlfksd'
+  };
   constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
