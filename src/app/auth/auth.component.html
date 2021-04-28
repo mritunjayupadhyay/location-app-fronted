@@ -1,1 +1,32 @@
-<p>auth works!</p>
+<div class="cont_principal">
+  <div class="cont_centrar">
+    <div class="cont_login">
+      <form action="">
+        <div class="cont_tabs_login">
+          <ul class='ul_tabs'>
+            <li [class]="sign_in_class"><a href="#" (click)="sign_in()">SIGN IN</a>
+              <span class="linea_bajo_nom"></span>
+            </li>
+            <li [class]="sign_up_class"><a href="#" (click)="sign_up()">SIGN UP</a><span class="linea_bajo_nom"></span>
+            </li>
+          </ul>
+        </div>
+        <div class="cont_text_inputs">
+          <input type="text" [class]="inputClass"  placeholder="NAME" (input)="onChangeText($event)" name="name_us" [value]="name_us" />
+
+          <input type="text" [class]="activeInput" placeholder="EMAIL" (input)="onChangeText($event)" name="email_us" [value]="email_us" />
+
+          <input type="password" [class]="activeInput" placeholder="PASSWORD" (input)="onChangeText($event)" name="pass_us" [value]="pass_us" />
+          <input type="password" [class]="inputClass"  placeholder="CONFIRM PASSWORD" (input)="onChangeText($event)" name="conf_pass_us" [value]="conf_pass_us" />
+
+        </div>
+        <div class="cont_btn">
+          <button class="btn_sign" *ngIf="isSignIn; else signupButton">SIGN IN</button>
+          <ng-template #signupButton>
+            <button class="btn_sign">SIGN UP</button>
+          </ng-template>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,19 +1,28 @@
 header {
-  display: flex;
-  height: 100px;
-  padding: 0px 20px;
-  justify-content: space-between;
-  align-items: center;
-  background-color: purple;
-  color: white;
-  font-size: 30px;
-  button {
-    border: 0;
-    background-color: white;
-    font-size: 20px;
-    color: purple;
-    width: 120px;
-    height: 40px;
-    text-align: center;
+  
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  .header-container {
+    display: flex;
+    height: 100px;
+    padding: 0px 20px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 64, 88, 0.74);
+    color: white;
+    font-size: 30px;
+    button {
+      border: 0;
+      background-color: white;
+      font-size: 20px;
+      color: rgba(255, 64, 88, 0.74);
+      width: 120px;
+      height: 40px;
+      text-align: center;
+    }
   }
+  
 }
