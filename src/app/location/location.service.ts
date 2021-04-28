@@ -43,6 +43,7 @@ export class LocationService {
 
   fetchLocations() {
     const authToken = this.authSerive.getAuthToken();
+    console.log("fetch location", authToken);
     this.http
       .get<{ error: false, data: Location[] }>(
         `${baseUrl}/locations`,

@@ -1,5 +1,6 @@
 import { AuthService } from './auth/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs/internal/Subscription';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,12 +10,15 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'jagota-test-frontend';
   authToken = '';
   userName = '';
+  subscriptionAuthToken: Subscription;
+  subscriptionUserName: Subscription;
+
   constructor(private authSerive: AuthService) {}
   ngOnInit(): void {
-    this.authSerive.authTokenChanged.subscribe((token) => {
+    this.subscriptionAuthToken = this.authSerive.authTokenChanged.subscribe((token) => {
       this.authToken = token;
     });
-    this.authSerive.userNameChanged.subscribe((name) => {
+    this.subscriptionUserName = this.authSerive.userNameChanged.subscribe((name) => {
       this.userName = name;
     });
     this.authToken = this.authSerive.getAuthToken();
@@ -25,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.authSerive.authTokenChanged.unsubscribe();
-    this.authSerive.userNameChanged.unsubscribe();
+    this.subscriptionAuthToken.unsubscribe();
+    this.subscriptionUserName.unsubscribe();
   }
 }
