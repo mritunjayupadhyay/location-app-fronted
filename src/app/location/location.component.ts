@@ -17,7 +17,6 @@ export class LocationComponent implements OnInit {
     this.subscriptionSelectedLocation = this.locationService.locationSelected
     .subscribe(
       (location: Location) => {
-        console.log("locatin", location);
         this.selectedLocation = location;
       }
     );

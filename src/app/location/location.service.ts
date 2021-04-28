@@ -6,15 +6,14 @@ import { Subject } from 'rxjs';
 import { Location } from './location.model';
 
 import { baseUrl } from '../config';
-
-const authToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2MDg0MzU1NDJjNWMxZjIzZjgzMjRjYjUiLCJpYXQiOjE2MTk1Nzk5NzUsImV4cCI6MTYxOTYxNTk3NX0.mJT3f80xPElhjffS1OOTHyVg2gylZ0KGfssvmP-4o9Q";
+import { AuthService } from '../auth/auth.service';
 @Injectable({ providedIn: 'root' })
 export class LocationService {
   locationsChanged = new Subject<Location[]>();
   locationSelected = new Subject<Location>();
   private locations: Location[];
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authSerive: AuthService) {}
 
   getLocations(): Location[] {
     return this.locations;
@@ -25,6 +24,7 @@ export class LocationService {
   }
 
   addLocation(location: Location) {
+    const authToken = this.authSerive.getAuthToken();
     this.http
       .post(
         `${baseUrl}/locations`,
@@ -42,6 +42,7 @@ export class LocationService {
   }
 
   fetchLocations() {
+    const authToken = this.authSerive.getAuthToken();
     this.http
       .get<{ error: false, data: Location[] }>(
         `${baseUrl}/locations`,

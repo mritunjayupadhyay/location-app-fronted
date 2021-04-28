@@ -8,29 +8,42 @@ import { User } from './user.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  authToken;
-  user;
+  authToken: string;
+  userName: string;
   authTokenChanged = new Subject<string>();
+  userNameChanged = new Subject<string>();
   constructor(private http: HttpClient) {}
 
   getAuthToken(): string {
     return this.authToken;
   }
 
+  getUserName(): string {
+    return this.userName;
+  }
+
   setAuthToken(authToken) {
-    if (authToken && authToken !== this.authToken) {
+    if (authToken !== this.authToken) {
       localStorage.setItem('authToken', authToken);
       this.authTokenChanged.next(authToken);
     }
   }
 
-  setUser(user: User) {
-    this.user = user;
+  setUser(userName: string) {
+    if (userName !== this.userName) {
+      localStorage.setItem('userName', userName);
+      this.userNameChanged.next(userName);
+    }
   }
 
   checkAuthToken() {
     const authToken = localStorage.getItem('authToken');
     this.setAuthToken(authToken);
+  }
+
+  checkUserName() {
+    const userName = localStorage.getItem('userName');
+    this.setUser(userName);
   }
 
   login({ email, password}: Login) {
@@ -47,7 +60,7 @@ export class AuthService {
           return;
         }
         const { authToken, user } = data;
-        this.setUser(user);
+        this.setUser(user.name);
         this.setAuthToken(authToken);
       });
   }
@@ -67,7 +80,7 @@ export class AuthService {
           return;
         }
         const { authToken, user } = data;
-        this.setUser(user);
+        this.setUser(user.name);
         this.setAuthToken(authToken);
       });
   }
