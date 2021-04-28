@@ -1,5 +1,6 @@
 import { AppComponent } from './../app.component';
-import { Component } from "@angular/core";
+import { Component, OnDestroy, OnInit } from "@angular/core";
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +9,21 @@ import { Component } from "@angular/core";
     './header.component.scss'
   ]
 })
-export class HeaderComponent {}
+export class HeaderComponent implements OnInit, OnDestroy {
+  authToken = '';
+  constructor(private authService: AuthService) {}
+
+  ngOnInit(): void {
+    this.authService.authTokenChanged.subscribe((token) => {
+      this.authToken = token;
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.authService.authTokenChanged.unsubscribe();
+  }
+
+  logout() {
+    this.authService.logout();
+  }
+}

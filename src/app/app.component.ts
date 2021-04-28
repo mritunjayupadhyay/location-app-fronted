@@ -1,16 +1,16 @@
 import { AuthService } from './auth/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'jagota-test-frontend';
   authToken = '';
   userName = '';
   constructor(private authSerive: AuthService) {}
-  ngOnInit() {
+  ngOnInit(): void {
     this.authSerive.authTokenChanged.subscribe((token) => {
       this.authToken = token;
     });
@@ -22,5 +22,10 @@ export class AppComponent implements OnInit {
 
     this.userName = this.authSerive.getUserName();
     this.authSerive.checkUserName();
+  }
+
+  ngOnDestroy(): void {
+    this.authSerive.authTokenChanged.unsubscribe();
+    this.authSerive.userNameChanged.unsubscribe();
   }
 }

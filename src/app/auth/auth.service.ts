@@ -84,4 +84,11 @@ export class AuthService {
         this.setAuthToken(authToken);
       });
   }
+
+  logout() {
+    localStorage.removeItem('userName');
+    localStorage.removeItem('authToken');
+    this.userNameChanged.next('');
+    this.authTokenChanged.next('');
+  }
 }
