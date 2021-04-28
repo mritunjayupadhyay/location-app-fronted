@@ -1,5 +1,6 @@
 <app-header></app-header>
-<div class="container">
-  <h2>Our Location List</h2>
-  <app-location></app-location>
-</div>
+
+<app-location *ngIf="authToken; else showAuth"></app-location>
+<ng-template #showAuth>
+  <app-auth></app-auth>
+</ng-template>

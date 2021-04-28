@@ -10,6 +10,7 @@ import { LocationListComponent } from './location/location-list/location-list.co
 import { LocationMapDetailsComponent } from './location/location-map-details/location-map-details.component';
 import { LocationItemComponent } from './location/location-list/location-item/location-item.component';
 import { googleApiKey } from './config';
+import { AuthComponent } from './auth/auth.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,6 +19,7 @@ import { googleApiKey } from './config';
     LocationListComponent,
     LocationMapDetailsComponent,
     LocationItemComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
