@@ -1,3 +1,4 @@
+import { AuthService } from './auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -17,7 +18,7 @@ export class AuthComponent implements OnInit {
   email_us = '';
   pass_us = '';
   conf_pass_us = '';
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
   }
@@ -40,6 +41,28 @@ export class AuthComponent implements OnInit {
     if (!event) { return; }
     const { name, value  } = event.target;
     this[name] = value;
+  }
+
+  submit_sign_in(event) {
+    const { email_us, pass_us } = this;
+    if (!(email_us && pass_us)) {
+      alert('Email and password are not valid');
+      return;
+    }
+    this.authService.login({email: email_us, password: pass_us });
+  }
+
+  submit_sign_up(event) {
+    const { email_us, name_us,  pass_us, conf_pass_us } = this;
+    if (!(email_us && name_us && pass_us)) {
+      alert('Email, Password and name are required');
+      return;
+    }
+    if (pass_us !== conf_pass_us) {
+      alert('Password and confirm password are not same');
+      return;
+    }
+    this.authService.register({email: email_us, password: pass_us, name: name_us });
   }
 
 }

@@ -1,7 +1,7 @@
 <div class="cont_principal">
   <div class="cont_centrar">
     <div class="cont_login">
-      <form action="">
+      <form onsubmit="return false;">
         <div class="cont_tabs_login">
           <ul class='ul_tabs'>
             <li [class]="sign_in_class"><a href="#" (click)="sign_in()">SIGN IN</a>
@@ -21,9 +21,9 @@
 
         </div>
         <div class="cont_btn">
-          <button class="btn_sign" *ngIf="isSignIn; else signupButton">SIGN IN</button>
+          <button class="btn_sign" (click)="submit_sign_in($event)" *ngIf="isSignIn; else signupButton">SIGN IN</button>
           <ng-template #signupButton>
-            <button class="btn_sign">SIGN UP</button>
+            <button class="btn_sign" (click)="submit_sign_up($event)">SIGN UP</button>
           </ng-template>
         </div>
       </form>
