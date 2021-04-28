@@ -1,5 +1,6 @@
-import { Location } from './../location.model';
 import { Component, OnInit } from '@angular/core';
+import { LocationService } from './../location.service';
+import { Location } from './../location.model';
 @Component({
   selector: 'app-location-list',
   templateUrl: './location-list.component.html',
@@ -10,9 +11,10 @@ export class LocationListComponent implements OnInit {
     new Location('user1', 12, 21, 'first place'),
     new Location('user1', 15, 41, 'second place')
   ];
-  constructor() { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
+    this.locationService.getLocations();
   }
 
 }
