@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Location } from './../location.model';
+import { Component, Input, OnInit } from '@angular/core';
+import { LocationService } from '../location.service';
 
 @Component({
   selector: 'app-location-map-details',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./location-map-details.component.scss']
 })
 export class LocationMapDetailsComponent implements OnInit {
-
-  constructor() { }
+  location: Location;
+  constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
+    this.locationService.locationSelected.subscribe((location: Location) => {
+      console.log(location, "location");
+      
+      this.location = location;
+    })
   }
 
 }

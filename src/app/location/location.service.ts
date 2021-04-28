@@ -11,12 +11,17 @@ const authToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M
 @Injectable({ providedIn: 'root' })
 export class LocationService {
   locationsChanged = new Subject<Location[]>();
+  locationSelected = new Subject<Location>();
   private locations: Location[];
 
   constructor(private http: HttpClient) {}
 
-  getLocation(): Location[] {
+  getLocations(): Location[] {
     return this.locations;
+  }
+
+  selectLocation(location: Location) {
+    this.locationSelected.next({...location});
   }
 
   addLocation(location: Location) {

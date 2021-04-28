@@ -1,5 +1,7 @@
-<div>
-  <p>{{ location.latitude }}</p>
-  <p>{{ location.longitude }}</p>
-  <p>{{ location.address }}</p>
+<div class="locationItem" (click)="selectLocationItem()">
+  <div class="latitude-longitude-container">
+    <p>{{ location.latitude }}, </p>
+    <p>{{ location.longitude }}</p>
+  </div>
+  <p class="address">{{ location.address }}</p>
 </div>

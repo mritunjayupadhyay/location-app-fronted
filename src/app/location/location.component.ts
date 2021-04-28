@@ -1,4 +1,7 @@
+import { Location } from './location.model';
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LocationService } from './location.service';
 
 @Component({
   selector: 'app-location',
@@ -6,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./location.component.scss']
 })
 export class LocationComponent implements OnInit {
-
-  constructor() { }
+  selectedLocation: Location | null = null;
+  subscriptionSelectedLocation: Subscription;
+  constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
+    this.subscriptionSelectedLocation = this.locationService.locationSelected
+    .subscribe(
+      (location: Location) => {
+        console.log("locatin", location);
+        this.selectedLocation = location;
+      }
+    );
   }
 
 }
