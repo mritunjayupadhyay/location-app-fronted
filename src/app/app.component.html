@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header [authToken]="authToken"></app-header>
 <h2 *ngIf="authToken">Hello {{ userName }}</h2>
 <app-location *ngIf="authToken; else showAuth"></app-location>
 <ng-template #showAuth>

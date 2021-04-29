@@ -1,35 +1,39 @@
 import { AuthService } from './auth/auth.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { LocationService } from './location/location.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [AuthService]
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit {
   title = 'jagota-test-frontend';
   authToken = '';
   userName = '';
   subscriptionAuthToken: Subscription;
   subscriptionUserName: Subscription;
 
-  constructor(private authSerive: AuthService) {}
+  constructor(private authService: AuthService, private locationService: LocationService) {}
   ngOnInit(): void {
-    this.subscriptionAuthToken = this.authSerive.authTokenChanged.subscribe((token) => {
+    this.subscriptionAuthToken = this.authService.authTokenChanged.subscribe((token) => {
+      console.log("auth token changed and subscribed to here 2", token);
       this.authToken = token;
+      this.locationService.fetchLocations();
     });
-    this.subscriptionUserName = this.authSerive.userNameChanged.subscribe((name) => {
+    this.subscriptionUserName = this.authService.userNameChanged.subscribe((name) => {
       this.userName = name;
     });
-    this.authToken = this.authSerive.getAuthToken();
-    this.authSerive.checkAuthToken();
+    this.authToken = this.authService.getAuthToken();
+    this.authService.checkAuthToken();
 
-    this.userName = this.authSerive.getUserName();
-    this.authSerive.checkUserName();
+    this.userName = this.authService.getUserName();
+    this.authService.checkUserName();
   }
 
-  ngOnDestroy(): void {
-    this.subscriptionAuthToken.unsubscribe();
-    this.subscriptionUserName.unsubscribe();
-  }
+  // ngOnDestroy(): void {
+  //   this.subscriptionAuthToken.unsubscribe();
+  //   this.subscriptionUserName.unsubscribe();
+  // }
 }

@@ -11,9 +11,8 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class LocationListComponent implements OnInit, OnDestroy {
   locations: Location[];
   subscription: Subscription;
-  subscriptionAuthToken: Subscription;
 
-  constructor(private locationService: LocationService, private authService: AuthService) { }
+  constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
     this.subscription = this.locationService.locationsChanged
@@ -22,10 +21,7 @@ export class LocationListComponent implements OnInit, OnDestroy {
           this.locations = locations;
         }
       );
-      this.subscriptionAuthToken = this.authService.authTokenChanged.subscribe((token) => {
-        this.locationService.fetchLocations();
-      });
-    this.locationService.fetchLocations();
+    
   }
 
   ngOnDestroy(): void {

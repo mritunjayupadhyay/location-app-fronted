@@ -15,15 +15,16 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   getAuthToken(): string {
-    return this.authToken;
+    return localStorage.getItem('authToken');
   }
 
   getUserName(): string {
-    return this.userName;
+    return localStorage.getItem('userName');
   }
 
   setAuthToken(authToken) {
     if (authToken !== this.authToken) {
+      this.authToken = authToken;
       localStorage.setItem('authToken', authToken);
       this.authTokenChanged.next(authToken);
     }
@@ -31,12 +32,14 @@ export class AuthService {
 
   setUser(userName: string) {
     if (userName !== this.userName) {
+      this.userName = userName;
       localStorage.setItem('userName', userName);
       this.userNameChanged.next(userName);
     }
   }
 
   checkAuthToken() {
+    console.log("Check auth token 1", this.authToken);
     const authToken = localStorage.getItem('authToken');
     this.setAuthToken(authToken);
   }

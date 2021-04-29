@@ -25,6 +25,8 @@ export class LocationService {
 
   addLocation(location: Location) {
     const authToken = this.authSerive.getAuthToken();
+    const username = this.authSerive.getUserName();
+    console.log("auth token in location service", authToken, username, this.authSerive);
     this.http
       .post(
         `${baseUrl}/locations`,
@@ -43,7 +45,8 @@ export class LocationService {
 
   fetchLocations() {
     const authToken = this.authSerive.getAuthToken();
-    console.log("fetch location", authToken);
+    const username = this.authSerive.getUserName();
+    console.log("auth token in location service", authToken, username, this.authSerive);
     this.http
       .get<{ error: false, data: Location[] }>(
         `${baseUrl}/locations`,

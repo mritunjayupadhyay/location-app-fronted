@@ -1,5 +1,5 @@
 import { AppComponent } from './../app.component';
-import { Component, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
 
@@ -10,19 +10,13 @@ import { Subscription } from 'rxjs';
     './header.component.scss'
   ]
 })
-export class HeaderComponent implements OnInit, OnDestroy {
-  authToken = '';
+export class HeaderComponent implements OnInit {
   subscription: Subscription;
+  @Input() authToken: string;
   constructor(private authService: AuthService) {}
 
   ngOnInit(): void {
-    this.subscription = this.authService.authTokenChanged.subscribe((token) => {
-      this.authToken = token;
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    
   }
 
   logout() {
