@@ -1,5 +1,4 @@
 header {
-  
   z-index: 100;
   position: fixed;
   top: 0;
@@ -11,18 +10,38 @@ header {
     padding: 0px 20px;
     justify-content: space-between;
     align-items: center;
-    background-color: rgb(255, 64, 88);
-    color: white;
-    font-size: 30px;
+    background-color: white;
+    color: #3699ff;
+    @media screen and (max-width: 720px) {
+      padding: 0px 10px;
+    }
+    h2 {
+      font-size: 24px;
+      font-weight: 400;
+      font-family: 'Prompt', sans-serif;
+      @media screen and (max-width: 720px) {
+        visibility: hidden;
+        font-size: 10px;
+      }
+    }
     button {
       border: 0;
-      background-color: white;
-      font-size: 20px;
-      color: rgba(255, 64, 88, 0.74);
-      width: 120px;
+      font-size: 14px;
       height: 40px;
       text-align: center;
       cursor: pointer;
+      // color: #3699ff;
+      color: #fff;
+      background-color: #3699ff;
+      border-color: transparent;
+      min-width: 80px;
+      padding: 0 15px;
+      border-radius: 7px;
+    }
+    button.danger {
+      color: white;
+      background-color: #f64e60;
+      margin-left: 20px;
     }
   }
   

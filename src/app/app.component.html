@@ -1,6 +1,10 @@
-<app-header [authToken]="authToken"></app-header>
-<h2 *ngIf="authToken">Hello {{ userName }}</h2>
-<app-location *ngIf="authToken; else showAuth"></app-location>
-<ng-template #showAuth>
-  <app-auth></app-auth>
-</ng-template>
+<div class="app-component">
+  <div class="app-component-container">
+    <app-header [authToken]="authToken"></app-header>
+    <h2 *ngIf="authToken">Hello {{ userName }}</h2>
+    <app-location *ngIf="authToken; else showAuth"></app-location>
+    <ng-template #showAuth>
+      <app-auth></app-auth>
+    </ng-template>
+  </div>
+</div>

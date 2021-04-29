@@ -1,7 +1,14 @@
+.app-component {
+  background-color: #EDEFF7;
+  .app-component-container {
+    padding-top: 120px;
+  }
+}
 h2 {
-  font-size: 45px;
+  font-size: 30px;
   margin: 20px 15px;
   text-align: center;
-  margin-top: 100px;
-
+  margin-top: 10px;
+  font-weight: 400;
+  font-family: 'Prompt', sans-serif;
 }
