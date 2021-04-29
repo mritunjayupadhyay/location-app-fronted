@@ -1,4 +1,4 @@
-import { Location } from './../location.model';
+import { LocationDB } from './../location.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { LocationService } from '../location.service';
 
@@ -8,18 +8,17 @@ import { LocationService } from '../location.service';
   styleUrls: ['./location-map-details.component.scss']
 })
 export class LocationMapDetailsComponent implements OnInit {
-  location: Location = {
+  location: LocationDB = {
     latitude: 12,
     longitude: 20,
     address: 'some addres',
-    userId: 'sdlfksd'
+    userId: 'sdlfksd',
+    _id: 'klsdfs'
   };
   constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
-    this.locationService.locationSelected.subscribe((location: Location) => {
-      console.log(location, "location");
-      
+    this.locationService.locationSelected.subscribe((location: LocationDB) => {
       this.location = location;
     })
   }

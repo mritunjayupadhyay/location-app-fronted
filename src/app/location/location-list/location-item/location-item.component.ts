@@ -1,4 +1,4 @@
-import { Location } from './../../location.model';
+import { LocationDB } from './../../location.model';
 import { Component, Input, OnInit } from '@angular/core';
 import { LocationService } from '../../location.service';
 @Component({
@@ -7,7 +7,7 @@ import { LocationService } from '../../location.service';
   styleUrls: ['./location-item.component.scss']
 })
 export class LocationItemComponent implements OnInit {
-  @Input() location: Location;
+  @Input() location: LocationDB;
   constructor(private locationService: LocationService) { }
 
   ngOnInit(): void {
@@ -17,5 +17,8 @@ export class LocationItemComponent implements OnInit {
     console.log("click")
     this.locationService.selectLocation(this.location);
   }
-
+  delete(event) {
+    event.stopPropagation();
+    this.locationService.deleteLocation(this.location._id);
+  }
 }

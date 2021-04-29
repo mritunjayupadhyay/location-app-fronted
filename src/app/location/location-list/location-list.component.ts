@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LocationService } from './../location.service';
-import { Location } from './../location.model';
+import { LocationDB } from './../location.model';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/auth/auth.service';
 @Component({
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./location-list.component.scss']
 })
 export class LocationListComponent implements OnInit, OnDestroy {
-  locations: Location[];
+  locations: LocationDB[];
   subscription: Subscription;
 
   constructor(private locationService: LocationService) { }
@@ -17,7 +17,7 @@ export class LocationListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscription = this.locationService.locationsChanged
       .subscribe(
-        (locations: Location[]) => {
+        (locations: LocationDB[]) => {
           this.locations = locations;
         }
       );

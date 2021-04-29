@@ -11,6 +11,7 @@ import { LocationMapDetailsComponent } from './location/location-map-details/loc
 import { LocationItemComponent } from './location/location-list/location-item/location-item.component';
 import { googleApiKey } from './config';
 import { AuthComponent } from './auth/auth.component';
+import { LocationFormComponent } from './location/location-form/location-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +21,7 @@ import { AuthComponent } from './auth/auth.component';
     LocationMapDetailsComponent,
     LocationItemComponent,
     AuthComponent,
+    LocationFormComponent,
   ],
   imports: [
     BrowserModule,

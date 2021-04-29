@@ -1,4 +1,4 @@
-import { AppComponent } from './../app.component';
+import { LocationService } from './../location/location.service';
 import { Component, Input, OnDestroy, OnInit } from "@angular/core";
 import { AuthService } from '../auth/auth.service';
 import { Subscription } from 'rxjs';
@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 export class HeaderComponent implements OnInit {
   subscription: Subscription;
   @Input() authToken: string;
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private locationService: LocationService) {}
 
   ngOnInit(): void {
     
@@ -21,5 +21,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  addAddress() {
+    this.locationService.onOpenAddLocationForm();
   }
 }

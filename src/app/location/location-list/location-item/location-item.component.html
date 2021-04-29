@@ -4,5 +4,5 @@
     <p>{{ location.longitude }}</p>
   </div>
   <p class="address">{{ location.address }}</p>
-  <button>Delete</button>
+  <button (click)="delete($event)">Delete</button>
 </div>
