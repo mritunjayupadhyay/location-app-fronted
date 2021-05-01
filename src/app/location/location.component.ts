@@ -22,6 +22,7 @@ export class LocationComponent implements OnInit, OnDestroy {
       },
       (error) => {
         console.log("Error in selecting")
+        this.selectedLocation = null;
       }
     );
   }
