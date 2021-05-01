@@ -1,18 +1,23 @@
 import { AuthService } from './auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss']
 })
-export class AuthComponent implements OnInit {
+export class AuthComponent implements OnInit, OnDestroy {
   activeInput = "input_form_sign d_block active_inp";
   inActiveInput = "input_form_sign";
   sign_in_class = "active";
   sign_up_class = "inActive"
   inputClass = "input_form_sign";
   isSignIn = true;
+
+  completeLogin: Subscription;
+  completeRegister: Subscription;
+
 
   name_us = '';
   email_us = '';
@@ -21,6 +26,29 @@ export class AuthComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.completeLogin = this.authService.completeLogin
+    .subscribe(
+      (data) => {
+        alert(data);
+      },
+      (error) => {
+        alert(error);
+      }
+    );
+    this.completeRegister = this.authService.completeRegister
+    .subscribe(
+      (data) => {
+        alert(data);
+      },
+      (error) => {
+        alert(error);
+      }
+    );
+  }
+
+  ngOnDestroy() {
+    this.completeLogin.unsubscribe();
+    this.completeRegister.unsubscribe();
   }
 
   sign_in() {

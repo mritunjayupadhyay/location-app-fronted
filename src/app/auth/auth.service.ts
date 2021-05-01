@@ -14,6 +14,9 @@ export class AuthService {
   userName: string;
   authTokenChanged = new Subject<string>();
   userNameChanged = new Subject<string>();
+  completeLogin = new Subject<any>();
+  completeRegister = new Subject<any>();
+
   constructor(private http: HttpClient) {}
 
   getAuthToken(): string {
@@ -69,7 +72,21 @@ export class AuthService {
         const { authToken, user } = data;
         this.setUser(user.name);
         this.setAuthToken(authToken);
-      });
+      },
+      ({ error = {} }) => {
+        console.log("error loign", error);
+        const { message } = error;
+        // let errMsg: string;
+        // if (typeof stack === 'string') {
+        //   errMsg = stack;
+        // } else {
+        //   const { message = [] } = stack;
+        //   const err = message[0] || '';
+        //   errMsg = `Error: ${err}`;
+        // }
+        this.completeLogin.next(message);
+      }
+      );
   }
 
   register({ email, password, name}: Register) {
@@ -89,7 +106,22 @@ export class AuthService {
         const { authToken, user } = data;
         this.setUser(user.name);
         this.setAuthToken(authToken);
-      });
+      },
+      ({error = {}}) => {
+        const { message, stack } = error;
+        console.log("message, stack", message, stack, error)
+        let errMsg: string;
+        if (typeof stack === 'string' || stack === undefined) {
+          errMsg = message;
+        } else {
+          const { message = [] } = stack;
+          const err = message[0] || '';
+          errMsg = `Error: ${err}`;
+        }
+        console.log("error for alert", errMsg);
+        this.completeRegister.next(errMsg);
+      }
+      );
   }
 
   logout() {
