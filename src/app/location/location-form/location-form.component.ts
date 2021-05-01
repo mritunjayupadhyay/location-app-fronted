@@ -58,6 +58,10 @@ export class LocationFormComponent implements OnInit {
       alert('Address, latitude and longitude are required');
       return;
     }
+    if (address.length < 7) {
+      alert('You address should be at least 7 character long');
+      return;
+    }
     this.locationService.saveLocationToDatabase(location);
   }
 

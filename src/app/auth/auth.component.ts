@@ -90,6 +90,14 @@ export class AuthComponent implements OnInit, OnDestroy {
       alert('Password and confirm password are not same');
       return;
     }
+    if (name_us.length < 4) {
+      alert('Your name should be at 4 character long');
+      return;
+    }
+    if (pass_us.length < 4) {
+      alert('Weak Password: Your password should be at 4 character long');
+      return;
+    }
     this.authService.register({email: email_us, password: pass_us, name: name_us });
   }
 
