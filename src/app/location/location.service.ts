@@ -13,6 +13,7 @@ export class LocationService {
   locationSelected = new Subject<LocationDB>();
   openLocationForm = new Subject<boolean>();
   private locations: LocationDB[];
+  private selectedLocation: LocationDB = null;
 
   constructor(private http: HttpClient, private authSerive: AuthService) {}
 
@@ -21,6 +22,7 @@ export class LocationService {
   }
 
   selectLocation(location: LocationDB) {
+    this.selectedLocation = { ...location };
     this.locationSelected.next({...location});
   }
 
@@ -79,7 +81,7 @@ export class LocationService {
   deleteLocation(id) {
     const authToken = this.authSerive.getAuthToken();
     this.http
-      .delete<{ error: false, data: LocationDB }>(
+      .delete<{ error: false, data: any }>(
         `${baseUrl}/locations/${id}`,
         {
           headers: {
@@ -89,9 +91,15 @@ export class LocationService {
         }
       )
       .subscribe(response => {
-        const { error, data } = response;
+        const { error } = response;
         if (error === false) {
           this.fetchLocations();
+          console.log("delete lcoation", id, this.selectedLocation);
+          if (id === this.selectedLocation._id) {
+            console.log("deleted lcoation", id, this.selectedLocation);
+            this.selectedLocation = null;
+            this.locationSelected.next(null);
+          }
           this.openLocationForm.next(false);
         }
       });

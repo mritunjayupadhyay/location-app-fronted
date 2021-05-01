@@ -20,6 +20,9 @@ export class LocationFormComponent implements OnInit {
     .subscribe(
       (open: boolean) => {
         this.openForm = open;
+        this.address = '';
+        this.latitude = undefined;
+        this.longitude = undefined;
       }
     );
   }

@@ -11,9 +11,9 @@ export class LocationMapDetailsComponent implements OnInit {
   location: LocationDB = {
     latitude: 12,
     longitude: 20,
-    address: 'some addres',
-    userId: 'sdlfksd',
-    _id: 'klsdfs'
+    address: ' ',
+    userId: '',
+    _id: ''
   };
   constructor(private locationService: LocationService) { }
 

@@ -17,6 +17,7 @@ export class LocationComponent implements OnInit, OnDestroy {
     this.subscriptionSelectedLocation = this.locationService.locationSelected
     .subscribe(
       (location: LocationDB) => {
+        console.log("location selected", location);
         this.selectedLocation = location;
       }
     );
