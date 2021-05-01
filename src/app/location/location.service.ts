@@ -12,6 +12,7 @@ export class LocationService {
   locationsChanged = new Subject<LocationDB[]>();
   locationSelected = new Subject<LocationDB>();
   openLocationForm = new Subject<boolean>();
+  saveLocation = new Subject<any>();
   private locations: LocationDB[];
   private selectedLocation: LocationDB = null;
 
@@ -37,7 +38,7 @@ export class LocationService {
   saveLocationToDatabase(location: Location) {
     const authToken = this.authSerive.getAuthToken();
     this.http
-      .post<{ error: false, data: LocationDB }>(
+      .post<{ error: boolean, data?: LocationDB }>(
         `${baseUrl}/locations`,
         location,
         {
@@ -53,7 +54,15 @@ export class LocationService {
           this.fetchLocations();
           this.openLocationForm.next(false);
         }
-      });
+      },
+      ({error = {}}) => {
+        const { stack = {} } = error;
+        const { message = [] } = stack;
+        const err = message[0] || '';
+        const errMsg = `Error: ${err}`;
+        this.saveLocation.error(errMsg);
+      }
+      );
   }
 
   fetchLocations() {
@@ -98,9 +107,11 @@ export class LocationService {
           if (id === this.selectedLocation._id) {
             console.log("deleted lcoation", id, this.selectedLocation);
             this.selectedLocation = null;
-            this.locationSelected.next(null);
+            this.locationSelected.error(null);
           }
           this.openLocationForm.next(false);
+        } else {
+
         }
       });
   }

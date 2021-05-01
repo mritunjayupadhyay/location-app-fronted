@@ -16,9 +16,9 @@
                 <div class="cont_login">
                   <form onsubmit="return false;">
                     <div class="cont_text_inputs">
-                      <input type="text" class="input_form_sign d_block active_inp"  placeholder="ADDRESS" (input)="onChangeText($event)" name="address" [value]="address" />            
-                      <input type="number" class="input_form_sign d_block active_inp" placeholder="LATITUDE" (input)="onChangeText($event)" name="latitude" [value]="latitude" />
-                      <input type="number" class="input_form_sign d_block active_inp"  placeholder="LONGITUDE" (input)="onChangeText($event)" name="longitude" [value]="longitude" />
+                      <input type="text" required class="input_form_sign d_block active_inp"  placeholder="ADDRESS" (input)="onChangeText($event)" name="address" [value]="address" />            
+                      <input type="number" required class="input_form_sign d_block active_inp" placeholder="LATITUDE" (input)="onChangeText($event)" name="latitude" [value]="latitude" />
+                      <input type="number" required class="input_form_sign d_block active_inp"  placeholder="LONGITUDE" (input)="onChangeText($event)" name="longitude" [value]="longitude" />
             
                     </div>
                     <div class="cont_btn">

@@ -19,6 +19,9 @@ export class LocationComponent implements OnInit, OnDestroy {
       (location: LocationDB) => {
         console.log("location selected", location);
         this.selectedLocation = location;
+      },
+      (error) => {
+        console.log("Error in selecting")
       }
     );
   }

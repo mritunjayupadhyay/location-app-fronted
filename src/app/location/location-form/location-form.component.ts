@@ -10,6 +10,8 @@ import { LocationService } from '../location.service';
 export class LocationFormComponent implements OnInit {
   openForm: boolean = false;
   subscriptionSelectedLocation: Subscription;
+  saveLocation: Subscription;
+
   address: string = "";
   latitude: number;
   longitude: number;
@@ -25,6 +27,13 @@ export class LocationFormComponent implements OnInit {
         this.longitude = undefined;
       }
     );
+    this.saveLocation = this.locationService.saveLocation
+    .subscribe(
+      () => {},
+      (error) => {
+        alert(error);
+      }
+    )
   }
 
   ngOnDestroy() {
@@ -43,7 +52,6 @@ export class LocationFormComponent implements OnInit {
       address,
       latitude: typeof latitude === 'string' ? parseFloat(latitude) : latitude,
       longitude: typeof longitude === 'string' ? parseFloat(longitude) : longitude,
-      userId: ''
     }
     console.log("location", location);
     if (!(latitude && longitude && address)) {
