@@ -3,9 +3,11 @@ import { Login } from './login.model';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { baseUrl } from '../config';
 import { User } from './user.model';
 
+import { environment } from '../../environments/environment';
+
+const { baseUrl } = environment;
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   authToken: string;
@@ -22,16 +24,18 @@ export class AuthService {
     return localStorage.getItem('userName');
   }
 
-  setAuthToken(authToken) {
-    if (authToken !== this.authToken) {
+  setAuthToken(authToken: string = '') {
+    console.log("this authToken", authToken)
+    if (authToken && authToken !== this.authToken) {
       this.authToken = authToken;
       localStorage.setItem('authToken', authToken);
       this.authTokenChanged.next(authToken);
     }
   }
 
-  setUser(userName: string) {
-    if (userName !== this.userName) {
+  setUser(userName: string = '') {
+    console.log("this username", userName)
+    if (userName && userName !== this.userName) {
       this.userName = userName;
       localStorage.setItem('userName', userName);
       this.userNameChanged.next(userName);
@@ -89,6 +93,8 @@ export class AuthService {
   }
 
   logout() {
+    this.userName = '';
+    this.authToken = '';
     localStorage.removeItem('userName');
     localStorage.removeItem('authToken');
     this.userNameChanged.next('');

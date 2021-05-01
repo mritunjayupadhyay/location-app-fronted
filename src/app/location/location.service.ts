@@ -5,14 +5,19 @@ import { Subject } from 'rxjs';
 
 import { Location, LocationDB } from './location.model';
 
-import { baseUrl } from '../config';
 import { AuthService } from '../auth/auth.service';
+
+import { environment } from '../../environments/environment';
+
+const { baseUrl } = environment;
 @Injectable({ providedIn: 'root' })
 export class LocationService {
   locationsChanged = new Subject<LocationDB[]>();
   locationSelected = new Subject<LocationDB>();
   openLocationForm = new Subject<boolean>();
+  saveLocation = new Subject<any>();
   private locations: LocationDB[];
+  private selectedLocation: LocationDB = null;
 
   constructor(private http: HttpClient, private authSerive: AuthService) {}
 
@@ -21,6 +26,7 @@ export class LocationService {
   }
 
   selectLocation(location: LocationDB) {
+    this.selectedLocation = { ...location };
     this.locationSelected.next({...location});
   }
 
@@ -35,7 +41,7 @@ export class LocationService {
   saveLocationToDatabase(location: Location) {
     const authToken = this.authSerive.getAuthToken();
     this.http
-      .post<{ error: false, data: LocationDB }>(
+      .post<{ error: boolean, data?: LocationDB }>(
         `${baseUrl}/locations`,
         location,
         {
@@ -51,7 +57,15 @@ export class LocationService {
           this.fetchLocations();
           this.openLocationForm.next(false);
         }
-      });
+      },
+      ({error = {}}) => {
+        const { stack = {} } = error;
+        const { message = [] } = stack;
+        const err = message[0] || '';
+        const errMsg = `Error: ${err}`;
+        this.saveLocation.error(errMsg);
+      }
+      );
   }
 
   fetchLocations() {
@@ -79,7 +93,7 @@ export class LocationService {
   deleteLocation(id) {
     const authToken = this.authSerive.getAuthToken();
     this.http
-      .delete<{ error: false, data: LocationDB }>(
+      .delete<{ error: false, data: any }>(
         `${baseUrl}/locations/${id}`,
         {
           headers: {
@@ -89,10 +103,18 @@ export class LocationService {
         }
       )
       .subscribe(response => {
-        const { error, data } = response;
+        const { error } = response;
         if (error === false) {
           this.fetchLocations();
+          console.log("delete lcoation", id, this.selectedLocation);
+          if (id === this.selectedLocation._id) {
+            console.log("deleted lcoation", id, this.selectedLocation);
+            this.selectedLocation = null;
+            this.locationSelected.error(null);
+          }
           this.openLocationForm.next(false);
+        } else {
+
         }
       });
   }

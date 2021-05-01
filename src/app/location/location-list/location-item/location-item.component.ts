@@ -19,6 +19,8 @@ export class LocationItemComponent implements OnInit {
   }
   delete(event) {
     event.stopPropagation();
-    this.locationService.deleteLocation(this.location._id);
+    if (confirm('Are you sure you want to delete')) {
+      this.locationService.deleteLocation(this.location._id);
+    }
   }
 }

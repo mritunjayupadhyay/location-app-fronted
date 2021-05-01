@@ -5,9 +5,9 @@
       <app-location-list></app-location-list>
     </div>
   </div>
- <div>
+ <div *ngIf="selectedLocation !== null">
     <div class="padding-10">
-      <app-location-map-details></app-location-map-details>
+      <app-location-map-details [location]="selectedLocation"></app-location-map-details>
     </div>
  </div>
 </div>
