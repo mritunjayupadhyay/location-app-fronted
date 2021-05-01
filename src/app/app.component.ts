@@ -10,8 +10,8 @@ import { LocationService } from './location/location.service';
 })
 export class AppComponent implements OnInit {
   title = 'jagota-test-frontend';
-  authToken = '';
-  userName = '';
+  authToken: string = '';
+  userName: string = '';
   subscriptionAuthToken: Subscription;
   subscriptionUserName: Subscription;
 
