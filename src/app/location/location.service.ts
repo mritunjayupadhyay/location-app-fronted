@@ -5,8 +5,11 @@ import { Subject } from 'rxjs';
 
 import { Location, LocationDB } from './location.model';
 
-import { baseUrl } from '../config';
 import { AuthService } from '../auth/auth.service';
+
+import { environment } from '../../environments/environment';
+
+const { baseUrl } = environment;
 @Injectable({ providedIn: 'root' })
 export class LocationService {
   locationsChanged = new Subject<LocationDB[]>();

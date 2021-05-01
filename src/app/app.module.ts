@@ -9,9 +9,11 @@ import { LocationComponent } from './location/location.component';
 import { LocationListComponent } from './location/location-list/location-list.component';
 import { LocationMapDetailsComponent } from './location/location-map-details/location-map-details.component';
 import { LocationItemComponent } from './location/location-list/location-item/location-item.component';
-import { googleApiKey } from './config';
 import { AuthComponent } from './auth/auth.component';
 import { LocationFormComponent } from './location/location-form/location-form.component';
+import { environment } from '../environments/environment';
+
+const { googleApiKey } = environment;
 @NgModule({
   declarations: [
     AppComponent,

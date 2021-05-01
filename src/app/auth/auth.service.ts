@@ -3,9 +3,11 @@ import { Login } from './login.model';
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Subject } from "rxjs";
-import { baseUrl } from '../config';
 import { User } from './user.model';
 
+import { environment } from '../../environments/environment';
+
+const { baseUrl } = environment;
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   authToken: string;
