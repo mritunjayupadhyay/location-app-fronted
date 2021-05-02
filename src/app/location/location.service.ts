@@ -71,7 +71,6 @@ export class LocationService {
   fetchLocations() {
     const authToken = this.authSerive.getAuthToken();
     const username = this.authSerive.getUserName();
-    console.log("auth token in location service", authToken, username, this.authSerive);
     this.http
       .get<{ error: false, data: LocationDB[] }>(
         `${baseUrl}/locations`,
@@ -106,9 +105,7 @@ export class LocationService {
         const { error } = response;
         if (error === false) {
           this.fetchLocations();
-          console.log("delete lcoation", id, this.selectedLocation);
           if (id === this.selectedLocation._id) {
-            console.log("deleted lcoation", id, this.selectedLocation);
             this.selectedLocation = null;
             this.locationSelected.error(null);
           }

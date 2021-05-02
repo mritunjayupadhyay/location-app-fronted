@@ -28,7 +28,6 @@ export class AuthService {
   }
 
   setAuthToken(authToken: string = '') {
-    console.log("this authToken", authToken)
     if (authToken && authToken !== this.authToken) {
       this.authToken = authToken;
       localStorage.setItem('authToken', authToken);
@@ -37,7 +36,6 @@ export class AuthService {
   }
 
   setUser(userName: string = '') {
-    console.log("this username", userName)
     if (userName && userName !== this.userName) {
       this.userName = userName;
       localStorage.setItem('userName', userName);
@@ -46,7 +44,6 @@ export class AuthService {
   }
 
   checkAuthToken() {
-    console.log("Check auth token 1", this.authToken);
     const authToken = localStorage.getItem('authToken');
     this.setAuthToken(authToken);
   }
@@ -74,7 +71,6 @@ export class AuthService {
         this.setAuthToken(authToken);
       },
       ({ error = {} }) => {
-        console.log("error loign", error);
         const { message } = error;
         // let errMsg: string;
         // if (typeof stack === 'string') {
@@ -97,7 +93,6 @@ export class AuthService {
         registerObj
       )
       .subscribe(response => {
-        console.log("register", response);
         const { error, data, message = '' } = response;
         if (error === true) {
           alert(`Error: ${message}`);
@@ -109,7 +104,6 @@ export class AuthService {
       },
       ({error = {}}) => {
         const { message, stack } = error;
-        console.log("message, stack", message, stack, error)
         let errMsg: string;
         if (typeof stack === 'string' || stack === undefined) {
           errMsg = message;
@@ -118,7 +112,6 @@ export class AuthService {
           const err = message[0] || '';
           errMsg = `Error: ${err}`;
         }
-        console.log("error for alert", errMsg);
         this.completeRegister.next(errMsg);
       }
       );

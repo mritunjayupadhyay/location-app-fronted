@@ -19,9 +19,7 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: AuthService, private locationService: LocationService) {}
   ngOnInit(): void {
-    console.log("environment", environment.baseUrl);
     this.subscriptionAuthToken = this.authService.authTokenChanged.subscribe((token) => {
-      console.log("auth token changed and subscribed to here 2", token);
       this.authToken = token;
       this.locationService.fetchLocations();
     });

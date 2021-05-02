@@ -1,10 +1,28 @@
 # JagotaTestFrontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.8.
+A simple Angular app to store and show address on google map. You can create, delete see location details on google map.
 
-## Start Project
+## Clone Projesct
 
-First Clone the project. Then do `npm install`.
-Run `ng serve --configuration=local` for a dev server. Navigate to `http://localhost:4200/`. 
-Make sure to run  api project before running this one.
+```bash
+$ git clone https://github.com/mritunjayupadhyay/location-app-fronted.git
+```
+
+## Installation
+
+```bash
+$ npm install
+```
+
+
+## Run Project
+
+```bash
+$ npm run start:local
+```
+
+## See Project View
+
+Navigate to `http://localhost:4200/`. 
+Make sure to run  api project(https://github.com/mritunjayupadhyay/location-app-backend) before running this one.
 

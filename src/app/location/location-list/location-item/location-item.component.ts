@@ -14,7 +14,6 @@ export class LocationItemComponent implements OnInit {
   }
 
   selectLocationItem() {
-    console.log("click")
     this.locationService.selectLocation(this.location);
   }
   delete(event) {
