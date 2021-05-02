@@ -53,13 +53,20 @@ export class LocationFormComponent implements OnInit {
       latitude: typeof latitude === 'string' ? parseFloat(latitude) : latitude,
       longitude: typeof longitude === 'string' ? parseFloat(longitude) : longitude,
     }
-    console.log("location", location);
     if (!(latitude && longitude && address)) {
       alert('Address, latitude and longitude are required');
       return;
     }
-    if (address.length < 7) {
+    if (address?.length < 7) {
       alert('You address should be at least 7 character long');
+      return;
+    }
+    if (latitude < -90 || latitude > 90) {
+      alert('Invalid Latitude');
+      return;
+    }
+    if (longitude < -180 || longitude > 180) {
+      alert('Invalid Longitude');
       return;
     }
     this.locationService.saveLocationToDatabase(location);

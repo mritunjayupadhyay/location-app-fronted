@@ -11,10 +11,7 @@ export class LocationMapDetailsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    // this.locationService.locationSelected.subscribe((location: LocationDB) => {
-    //   this.location = location;
-    //   console.log("lcoation selected", location);
-    // })
+    
   }
 
 }
