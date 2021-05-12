@@ -107,7 +107,7 @@ export class LocationService {
           this.fetchLocations();
           if (id === this.selectedLocation._id) {
             this.selectedLocation = null;
-            this.locationSelected.error(null);
+            this.locationSelected.next(null);
           }
           this.openLocationForm.next(false);
         } else {

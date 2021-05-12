@@ -1,13 +1,15 @@
 <div class="list-details-container">
   <app-location-form></app-location-form>
-  <div>
-    <div class="padding-10">
-      <app-location-list></app-location-list>
+  <div class="listAndMapContainer">
+    <div>
+      <div class="padding-10">
+        <app-location-list></app-location-list>
+      </div>
     </div>
+   <div *ngIf="selectedLocation !== null">
+      <div class="padding-10">
+        <app-location-map-details [location]="selectedLocation"></app-location-map-details>
+      </div>
+   </div>
   </div>
- <div *ngIf="selectedLocation !== null">
-    <div class="padding-10">
-      <app-location-map-details [location]="selectedLocation"></app-location-map-details>
-    </div>
- </div>
 </div>
